@@ -10,7 +10,7 @@ const outlineLength = outline.getTotalLength();
 //Duration
 const timeSelect = document.querySelectorAll(".time-select button");
 let fakeDuration = 1800;
-
+let loopFlag = 0;
 outline.style.strokeDashoffset = outlineLength;
 outline.style.strokeDasharray = outlineLength;
 timeDisplay.textContent = `${Math.floor(fakeDuration / 60)}:${
@@ -41,6 +41,10 @@ timeSelect.forEach((option) => {
 const checkPlaying = (song) => {
 	if (song.paused) {
 		song.play();
+		song.onended = function () {
+			loopFlag = loopFlag + 1;
+			song.play();
+		};
 		video.play();
 		play.src = "./svg/pause.svg";
 	} else {
@@ -49,14 +53,22 @@ const checkPlaying = (song) => {
 		play.src = "./svg/play.svg";
 	}
 };
-
 song.ontimeupdate = function () {
 	let currentTime = song.currentTime;
-	let elapsed = fakeDuration - currentTime;
+	let duration = song.duration;
+	let elapsed;
+	if (loopFlag === 0) {
+		elapsed = fakeDuration - currentTime;
+	} else {
+		elapsed = fakeDuration - song.duration * loopFlag - currentTime;
+	}
+	let progress =
+		outlineLength -
+		((duration * loopFlag + currentTime) / fakeDuration) * outlineLength;
 	let seconds = Math.floor(elapsed % 60);
 	let minutes = Math.floor(elapsed / 60);
 	timeDisplay.textContent = `${minutes}:${seconds}`;
-	let progress = outlineLength - (currentTime / fakeDuration) * outlineLength;
+
 	outline.style.strokeDashoffset = progress;
 
 	if (currentTime >= fakeDuration) {
