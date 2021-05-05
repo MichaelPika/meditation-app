@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 }
 
-.app {
+.vid-container {
 	height: 100vh;
 	display: flex;
 	justify-content: space-evenly;
@@ -26,7 +26,7 @@
 .sound-picker button {
 	color: white;
 	width: 30%;
-	height: 10%;
+	height: 15%;
 	background: none;
 	font-size: 20px;
 	border-radius: 5px;
@@ -92,29 +92,34 @@
 	font-size: 50px;
 	bottom: 10%;
 }
-
+.vid-container{
+	z-index: -100;
+}
 video {
 	position: fixed;
-	top: 0%;
-	left: 0%;
+	top: 0;
+	left: 0;
 	width: 100%;
-	z-index: -10;
-}
-@media screen and (max-width: 1018px) {
-	.time-select,
-	.sound-picker,
-	.player-container {
-		bottom: 70px;
+	height:100%;
+ }
+ @media screen and (max-width: 1440px) {
+	.time-select{
+		padding-left:150px;
+	}
+	.sound-picker{
+		padding-right:150px;
 	}
 }
-@media screen and (max-width: 790px) {
-	.time-select,
-	.sound-picker,
-	.player-container {
-		bottom: 100px;
+@media screen and (max-width: 1125px) {
+	.time-select{
+		padding-left:0;
+	}
+	.sound-picker{
+		padding-right:0;
 	}
 	.time-select button {
 		font-size: 12px;
+		height: 10%;
 	}
 	.sound-picker button {
 		height: 90px;
@@ -131,41 +136,13 @@ video {
 		width: 60px;
 	}
 }
-@media screen and (max-width: 700px) {
-	.time-select,
-	.sound-picker,
-	.player-container {
-		bottom: 130px;
-	}
-	.time-select,
-	.sound-picker {
-		justify-content: center;
-	}
-	.time-select button,
-	.sound-picker button {
-		margin: 20px;
-	}
-}
-@media screen and (max-width: 630px) {
-	.time-select,
-	.sound-picker,
-	.player-container {
-		bottom: 150px;
-	}
-	.time-display {
-		font-size: 30px;
-		bottom: 10%;
-	}
-}
 @media screen and (max-width: 520px) {
-	.time-select,
-	.sound-picker,
-	.player-container {
-		bottom: 150px;
+	.time-select{
+		justify-content: center;
 	}
 	.time-select button {
 		font-size: 10px;
-		margin: 5px;
+		margin: 25px 5px;
 		height: 7%;
 	}
 	.sound-picker button {
@@ -185,10 +162,15 @@ video {
 		width: 30px;
 	}
 }
-@media screen and (max-width: 460px) {
-	.time-select,
-	.sound-picker,
-	.player-container {
-		bottom: 180px;
+@media screen and (max-width: 425px) {
+	.sound-picker{
+		justify-content: center;
 	}
-}
+	.sound-picker button {
+		margin: 15px 10px;
+	}
+	.time-select button {
+		font-size: 8px;
+		margin: 20px 5px;
+	}
+} 
